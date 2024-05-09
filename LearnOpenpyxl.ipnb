@@ -1,0 +1,282 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyPtnmMclGBcUDTEhhShuiMe",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Emzy007/PythonPractice/blob/main/LearnOpenpyxl.ipnb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# Understanding openpyxl"
+      ],
+      "metadata": {
+        "id": "78ReJDYdPys6"
+      }
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "TbQi37KLwLC8"
+      },
+      "outputs": [],
+      "source": [
+        "import os\n",
+        "#from openpyxl import Workbook\n",
+        "import openpyxl as xl"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Print the current working directory\n",
+        "print(os.getcwd())"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "tMvnx6xgrphn",
+        "outputId": "aa41f6ca-791c-4dfd-f917-3ef22922cf75"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "/content\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "'''\n",
+        "# Create a new workbook\n",
+        "new_wb = xl.Workbook()\n",
+        "\n",
+        "# Create the first sheet\n",
+        "ws1 = new_wb.active\n",
+        "# By default the workbook will have 1 worksheet so renaming the default worksheet\n",
+        "ws1.title = \"Sheet1\"\n",
+        "\n",
+        "# Create the second sheet\n",
+        "ws2 = new_wb.create_sheet(\"Sheet2\")\n",
+        "\n",
+        "# Save the workbook as an xlsx file\n",
+        "fname = input('Enter the file name: ')\n",
+        "if os.path.exists(f'/content/{fname}'):\n",
+        "  print(\"File exists! Unable to save!\")\n",
+        "else:\n",
+        "  new_wb.save(fname)\n",
+        "  print(f\"File saved as {fname}!\")\n",
+        "  '''"
+      ],
+      "metadata": {
+        "id": "R0_R61mIsBpW"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Download or create a new Excel file"
+      ],
+      "metadata": {
+        "id": "v9gpOJglGK7C"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "'''\n",
+        "# Dowloading a sample Excel file from internet\n",
+        "\n",
+        "import os\n",
+        "import six.moves.urllib.request\n",
+        "\n",
+        "url = \"https://go.microsoft.com/fwlink/?LinkID=521962\"\n",
+        "filename = os.path.basename(url)\n",
+        "\n",
+        "six.moves.urllib.request.urlretrieve(url, filename)\n",
+        "'''"
+      ],
+      "metadata": {
+        "id": "TcASS4jSGO4e"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "wb = xl.load_workbook('samplefile.xlsx')\n",
+        "print('Type of wb:', type(wb))\n",
+        "print('Active worksheet object :', wb.active)\n",
+        "print('Worksheet names :', wb.sheetnames)\n",
+        "print('Worksheet objetcs :', wb.worksheets)\n",
+        "ws = wb['Sheet1']\n",
+        "print('Type of ws:', type(ws))"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "SK4lEe6OwcNm",
+        "outputId": "37f50ad0-f7aa-4659-d81a-6c5e7900d920"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Type of wb: <class 'openpyxl.workbook.workbook.Workbook'>\n",
+            "Active worksheet object : <Worksheet \"Sheet1\">\n",
+            "Worksheet names : ['Sheet1']\n",
+            "Worksheet objetcs : [<Worksheet \"Sheet1\">]\n",
+            "Type of ws: <class 'openpyxl.worksheet.worksheet.Worksheet'>\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Enter random numbers in cells\n",
+        "'''\n",
+        "import random\n",
+        "for i in range(1,999):\n",
+        "  ws[f'A{i}'] = random.randint(100, 999)\n",
+        "  ws[f'B{i}'] = random.randint(100, 999)\n",
+        "'''"
+      ],
+      "metadata": {
+        "id": "wSPxdbseBHRS"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#Accessing cells\n",
+        "cellA1 = ws.cell(1,1)\n",
+        "cellB1 = ws['B1']\n",
+        "cellC1 = ws['C1']\n",
+        "\n",
+        "#Accesing cell contents\n",
+        "print(f'A1 = {cellA1.value}\\nB1 = {cellB1.value}\\nC1 = {cellC1.value}')\n",
+        "\n",
+        "#Accessing using row or column tuple - This will print entire sheet. <<WARNING\n",
+        "print(\"Accessing cell values row-wise :\\n\")\n",
+        "all_rows = tuple(ws.rows)\n",
+        "for rows in all_rows:\n",
+        "    for col in rows:\n",
+        "        print(col.value, end=' ')\n",
+        "    print()\n",
+        "print(\"Accessing cell values column-wise :\\n\")\n",
+        "all_columns = tuple(ws.columns)\n",
+        "for cols in all_columns:\n",
+        "    for row in cols:\n",
+        "        print(row.value, end=' ')\n",
+        "    print()"
+      ],
+      "metadata": {
+        "id": "DEgoX3MUxyrS"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#Getting max rows and cols\n",
+        "print(\"Total rows: \",ws.max_row)\n",
+        "print(\"Total columns: \",ws.max_column)\n",
+        "#Print headers\n",
+        "cells = ws['A$1':'Z$1']\n",
+        "for row in cells:\n",
+        "  for col in row:\n",
+        "    if col.value!= None:\n",
+        "      print(col.value, end=' || ')\n",
+        "  print()"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "p_nHCPfyE6eq",
+        "outputId": "89719d90-63a5-4460-e19a-e861d980eba8"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Total rows:  701\n",
+            "Total columns:  26\n",
+            "Segment || Country || Product || Discount Band || Units Sold || Manufacturing Price || Sale Price || Gross Sales || Discounts ||  Sales || COGS || Profit || Date || Month Number || Month Name || Year || \n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(\"Accessing cell values row-wise :\\n\")\n",
+        "all_rows = tuple(ws.rows)\n",
+        "for rows in all_rows:\n",
+        "    for col in rows:\n",
+        "        print(col.value, end=' ')\n",
+        "    print()\n",
+        "print(\"Accessing cell values column-wise :\\n\")\n",
+        "all_columns = tuple(ws.columns)\n",
+        "for cols in all_columns:\n",
+        "    for row in cols:\n",
+        "        print(row.value, end=' ')\n",
+        "    print()"
+      ],
+      "metadata": {
+        "id": "bl93PMegE6VQ"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "l6CcoQi9DUCF"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
