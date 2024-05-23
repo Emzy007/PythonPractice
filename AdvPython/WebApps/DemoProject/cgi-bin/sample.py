@@ -11,7 +11,25 @@ print('''
 			<title> My First CGI Script </title>
 		</head>
 		<body>
-			<h1> Hello World </h1>
+			<h1> Login Form </h1>
+			<form method="POST" action="">
+				Username : <input type="text" name="username" placeholder="Enter Username" required /> <br />
+				Password : <input type="password" name="password" placeholder="Enter Password" required /> <br />
+				<input type="submit" name="submit" value ="Login" />
+			</form>
 		</body>
 	</html>
 ''')
+
+
+form = cgi.FieldStorage()
+if form:
+    if('username' in form.keys() and 'password' in form.keys()):
+        if(form['username'].value == ''):
+            if(form['password'].value == ''):
+                print('Login Successful !!! <br /> You will be redirected to homepage in 3 seconds ...')
+                print('<meta http-equiv=refresh content="3;url=homepage.py" />')
+            else:
+                print('Incorrect Password')
+        else:
+            print('Invalid Username')
