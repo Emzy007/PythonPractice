@@ -1,4 +1,4 @@
-#!C:\Python34\python.exe
+#!/home/codespace/.python/current/bin/python
 import cgi
 print('Content-type:text/html \n')
 print('''
