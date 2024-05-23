@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python310
 import cgi, cgitb
 #CGITB - CGI Traceback which displays runtime error on the webpage. Shows error type with location.
 #If a file name is given then it will not show the error on webpage else output to a file
