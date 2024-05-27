@@ -21,6 +21,6 @@ from SkillSet import views as skillsetviews
 
 urlpatterns = [
     path("", skillsetviews.homepage),
-    path('skillset/update',skillsetviews.updateskillset),
+    path("skillset/update",skillsetviews.updateskillset),
     path("admin/", admin.site.urls),
 ]
