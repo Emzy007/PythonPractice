@@ -30,7 +30,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "SkillSet.apps.Skillsetconfig",
+    "SkillSet.apps.SkillsetConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
