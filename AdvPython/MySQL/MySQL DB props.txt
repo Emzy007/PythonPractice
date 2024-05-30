@@ -1,0 +1,17 @@
+@Emzy007 ➜ /workspaces/PythonPractice (main) $ sudo ss -tap | grep mysql
+LISTEN     0      70               127.0.0.1:33060                      0.0.0.0:*                            users:(("mysqld",pid=36222,fd=20))                 
+LISTEN     0      151              127.0.0.1:mysql                      0.0.0.0:*                            users:(("mysqld",pid=36222,fd=22))
+
+@Emzy007 ➜ /workspaces/PythonPractice (main) $ sudo service mysql status
+ * /usr/bin/mysqladmin  Ver 8.0.36-0ubuntu0.20.04.1 for Linux on x86_64 ((Ubuntu))
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Server version          8.0.36-0ubuntu0.20.04.1
+Protocol version        10
+Connection              Localhost via UNIX socket
+UNIX socket             /var/run/mysqld/mysqld.sock
+Uptime:                 8 sec
